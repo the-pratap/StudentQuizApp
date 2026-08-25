@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const connectDB = require('./config/Database');
 const errorHandler = require('./middleware/errorHandler');
 
 // Route files
@@ -31,6 +33,19 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
+// Ensure database is ready before processing API queries
+app.use(async (req, res, next) => {
+  if (req.path === '/' || req.path === '/api/health') return next();
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      await connectDB();
+    }
+    next();
+  } catch (err) {
+    next();
+  }
+});
+
 // Root & Health check endpoints
 app.get('/', (req, res) => {
   res.status(200).json({
@@ -43,9 +58,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/health', (req, res) => {
+  const dbStatus =
+    mongoose.connection.readyState === 1
+      ? 'CONNECTED'
+      : mongoose.connection.readyState === 2
+      ? 'CONNECTING'
+      : 'DISCONNECTED';
+
   res.status(200).json({
     success: true,
     message: 'Quiz App Backend API is healthy and operational',
+    database: dbStatus,
     serverTime: new Date().toISOString(),
     version: '1.0.0',
   });
