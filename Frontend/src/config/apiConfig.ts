@@ -3,12 +3,9 @@ import { Platform } from 'react-native';
 /**
  * PRODUCTION DOMAIN CONFIGURATION:
  * 
- * If you have a live backend domain (e.g. "https://api.yourdomain.com" or "https://your-app.onrender.com"),
- * set PRODUCTION_API_URL below.
- * 
- * Leave it empty ('') if you want automatic local development detection (localhost / 10.0.2.2 for Android).
+ * Live backend domain on cPanel: https://quiz.we99.in/api
  */
-export const PRODUCTION_API_URL = ''; // <-- PUT YOUR LIVE DOMAIN URL HERE (e.g. 'https://api.yourdomain.com/api')
+export const PRODUCTION_API_URL = 'https://quiz.we99.in/api';
 
 // Auto-detect local development backend IP for Android Emulator vs Web vs Real Device
 const getDevApiBaseUrl = () => {
@@ -22,7 +19,7 @@ const getDevApiBaseUrl = () => {
   }
   // Android Emulator default loopback (10.0.2.2 connects to host computer localhost)
   if (Platform.OS === 'android') {
-    return 'http://quiz.we99.in/api';
+    return 'http://10.0.2.2:5000/api';
   }
   // iOS Simulator default loopback
   return 'http://localhost:5000/api';

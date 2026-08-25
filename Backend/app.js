@@ -31,7 +31,17 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
-// Health check endpoint
+// Root & Health check endpoints
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Student Quiz Application Backend API is operational',
+    healthEndpoint: '/api/health',
+    serverTime: new Date().toISOString(),
+    version: '1.0.0',
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     success: true,
