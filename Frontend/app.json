@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Student Quiz App",
+    "slug": "student-quiz-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "studentquiz",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": false,
+    "splash": {
+      "backgroundColor": "#0A0E17",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0E17"
+      }
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

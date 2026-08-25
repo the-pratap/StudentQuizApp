@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-native",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "baseUrl": "./Frontend",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "Frontend/**/*.ts",
+    "Frontend/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "Frontend/node_modules",
+    "Backend/node_modules"
+  ]
+}
